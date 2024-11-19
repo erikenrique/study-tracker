@@ -2,39 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>21 Savage Fans</title>
+  <title>Daily Study Tracker</title>
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="stylesheet" href="font-awesome.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>21 Savage</h1>
-  <h2>Why you trappin so hard?</h2>
 
+  <div id="overlay" class="overlay"></div>
+  <div id="popup" class="popup">
+    <img id="popupImage" src="" alt="Expanded Image">
+  </div>
 
-  <h3>Messages</h3>
-  <ul class="messages">
-  <% for(var i=0; i<messages.length; i++) {%>
-    <li class="message">
-      <span><%= messages[i].name %></span>
-      <span><%= messages[i].msg %></span>
-      <span><%= messages[i].thumbUp %></span>
-      <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-      <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-      <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-    </li>
-  <% } %>
+  <header></header>
+
+  <h1>Daily Study Tracker</h1>
+  <p>Record topics you've studied each day, including understanding level and insights. Upvote the most impactful topics.</p>
+
+  <h3>Study Topics</h3>
+  <ul class="posts">
+    <% for(let i = 0; i < topics.length; i++) { %>
+      <li class="post">
+        <strong>Topic:</strong> <span><%= topics[i].topic %></span>
+        <strong>Description:</strong> <span><%= topics[i].description %></span>
+        <strong>Understanding Level:</strong> <span><%= topics[i].level %></span>
+        <strong>Upvotes:</strong> <span><%= topics[i].upvotes %></span>
+
+        <% if (topics[i].image) { %>
+          <img src="data:image/jpeg;base64,<%= topics[i].image.toString('base64') %>" class="thumbnail" alt="Topic Image">
+        <% } %>
+
+        <button class="like-btn"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+        <button class="dislike-btn"><i class="fa fa-thumbs-down" aria-hidden="true"></i></button>
+        <button class="delete-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+      </li>
+    <% } %>
   </ul>
 
-  <h2>Add a message</h2>
+  <h2>Add a New Study Topic</h2>
 
-  <form action="/messages" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="message" name="msg">
-    <button type="submit">Submit</button>
+  <form action="/topics" method="POST" enctype="multipart/form-data">
+    <input type="text" placeholder="Topic name" name="topic" required>
+    <input type="text" placeholder="Description or insights on the topic" name="description" required>
+    <label for="level">Understanding Level</label>
+        <select name="level" id="level">
+            <option value="Beginner" selected="true" id="level-1">Beginner</option>
+            <option value="Intermediate" id="level-2">Intermediate</option>
+            <option value="Advanced" id="level-3">Advanced</option>
+        </select>
+    <input type="file" name="image" accept="image/*">
+    <button type="submit">Add Topic</button>
   </form>
 
   <script src="main.js"></script>
-
 </body>
 </html>

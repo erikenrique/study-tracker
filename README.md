@@ -6,9 +6,9 @@ Study Tracker is a web application designed to help users note topics they're st
 
 ## Features
 
-- **Session Tracking**: Log study sessions with details such as subject, duration, and notes.
-- **Difficulty Noting**: Note 
-- **User Authentication**: Securely access your personalized study data.
+- **Topic Saving**: Log study topics you're covering with details, image uploads
+- **Difficulty Noting**: Note difficulty of topics you're covering
+- **Frequency Tracking**: Track topics you return to over time to see which topics you're focusing on, are more important
 
 ---
 
